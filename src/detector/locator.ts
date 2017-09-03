@@ -52,8 +52,8 @@ function foundPatternCross(stateCount: number[]): boolean {
   if (totalModuleSize < 7)
     return false;
 
-  var moduleSize = (totalModuleSize << INTEGER_MATH_SHIFT) / 7;
-  var maxVariance = moduleSize / 2;
+  var moduleSize = Math.floor((totalModuleSize << INTEGER_MATH_SHIFT) / 7);
+  var maxVariance = Math.floor(moduleSize / 2);
   // Allow less than 50% variance from 1-1-3-1-1 proportions
   return Math.abs(moduleSize - (stateCount[0] << INTEGER_MATH_SHIFT)) < maxVariance &&
     Math.abs(moduleSize - (stateCount[1] << INTEGER_MATH_SHIFT)) < maxVariance &&
@@ -397,7 +397,7 @@ export function locate(matrix: BitMatrix): QRLocation {
     }
 
     var firstConfirmedCenter: FinderPattern = null;
-    possibleCenters.forEach((center) => {
+    for (const center of possibleCenters) {
       if (center.count >= CENTER_QUORUM) {
         if (firstConfirmedCenter == null) {
           firstConfirmedCenter = center;
@@ -414,7 +414,7 @@ export function locate(matrix: BitMatrix): QRLocation {
           // return (int)(Math.Abs(firstConfirmedCenter.X - center.X) - Math.Abs(firstConfirmedCenter.Y - center.Y)) / 2;
         }
       }
-    });
+    }
     return 0;
   }
 
