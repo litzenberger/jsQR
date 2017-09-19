@@ -79,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var BitMatrix = /** @class */ (function () {
     function BitMatrix(data, width) {
         this.width = width;
@@ -129,7 +129,7 @@ exports.BitMatrix = BitMatrix;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var BITS_SET_IN_HALF_BYTE = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4];
 function numBitsDiffering(a, b) {
     a ^= b; // a now has a 1 bit exactly where its bit differs with b's
@@ -157,7 +157,7 @@ exports.isNaN = isNaN;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var helpers_1 = __webpack_require__(1);
 var VERSION_DECODE_INFO = [
     0x07C94, 0x085BC, 0x09A99, 0x0A4D3, 0x0BBF6,
@@ -300,7 +300,7 @@ exports.getVersionForNumber = getVersionForNumber;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 /// <reference path="./common/types.d.ts" />
 var binarizer_1 = __webpack_require__(4);
 var locator_1 = __webpack_require__(5);
@@ -360,7 +360,7 @@ exports.decodeQRFromImageAsByteArray = decodeQRFromImageAsByteArray;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var bitmatrix_1 = __webpack_require__(0);
 var REGION_SIZE = 8;
 var MIN_DYNAMIC_RANGE = 24;
@@ -467,7 +467,7 @@ exports.binarize = binarize;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var CENTER_QUORUM = 2;
 var MIN_SKIP = 3;
 var MAX_MODULES = 57;
@@ -571,7 +571,7 @@ function ReorderFinderPattern(patterns) {
     return {
         bottomLeft: { x: pointA.x, y: pointA.y },
         topLeft: { x: pointB.x, y: pointB.y },
-        topRight: { x: pointC.x, y: pointC.y }
+        topRight: { x: pointC.x, y: pointC.y },
     };
 }
 function locate(matrix) {
@@ -996,7 +996,7 @@ exports.locate = locate;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 /// <reference path="../common/types.d.ts" />
 var alignment_finder_1 = __webpack_require__(7);
 var perspective_transform_1 = __webpack_require__(8);
@@ -1324,7 +1324,7 @@ exports.extract = extract;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var helpers_1 = __webpack_require__(1);
 function aboutEquals(center, moduleSize, i, j) {
     if (Math.abs(i - center.y) <= moduleSize && Math.abs(j - center.x) <= moduleSize) {
@@ -1524,7 +1524,7 @@ exports.findAlignment = findAlignment;
 "use strict";
 
 /// <reference path="../common/types.d.ts" />
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 function squareToQuadrilateral(x0, y0, x1, y1, x2, y2, x3, y3) {
     var dx3 = x0 - x1 + x2 - x3;
     var dy3 = y0 - y1 + y2 - y3;
@@ -1539,7 +1539,7 @@ function squareToQuadrilateral(x0, y0, x1, y1, x2, y2, x3, y3) {
             a32: y0,
             a13: 0,
             a23: 0,
-            a33: 1
+            a33: 1,
         };
     }
     else {
@@ -1559,7 +1559,7 @@ function squareToQuadrilateral(x0, y0, x1, y1, x2, y2, x3, y3) {
             a32: y0,
             a13: a13,
             a23: a23,
-            a33: 1
+            a33: 1,
         };
     }
 }
@@ -1628,7 +1628,7 @@ exports.quadrilateralToQuadrilateral = quadrilateralToQuadrilateral;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var bitmatrix_1 = __webpack_require__(0);
 var decodeqrdata_1 = __webpack_require__(10);
 var helpers_1 = __webpack_require__(1);
@@ -1687,7 +1687,7 @@ var ERROR_CORRECTION_LEVELS = [
 ];
 function buildFunctionPattern(version) {
     var dimension = version.getDimensionForVersion();
-    var emptyArray = new Uint8Array(dimension * dimension);
+    var emptyArray = new Uint8ClampedArray(dimension * dimension);
     var bitMatrix = new bitmatrix_1.BitMatrix(emptyArray, dimension);
     ///BitMatrix bitMatrix = new BitMatrix(dimension);
     // Top left finder pattern + separator + format
@@ -1800,7 +1800,7 @@ function readVersion(matrix) {
 function newFormatInformation(formatInfo) {
     return {
         errorCorrectionLevel: ERROR_CORRECTION_LEVELS[(formatInfo >> 3) & 0x03],
-        dataMask: formatInfo & 0x07
+        dataMask: formatInfo & 0x07,
     };
 }
 function doDecodeFormatInformation(maskedFormatInfo1, maskedFormatInfo2) {
@@ -2009,7 +2009,7 @@ exports.decode = decode;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var bitstream_1 = __webpack_require__(11);
 function toAlphaNumericByte(value) {
     var ALPHANUMERIC_CHARS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B',
@@ -2225,7 +2225,7 @@ var GB2312_SUBSET = 1;
 function decodeQRdata(data, version, ecl) {
     var symbolSequence = -1;
     var parityData = -1;
-    var bits = new bitstream_1.BitStream(data);
+    var bits = new bitstream_1.BitStream(Uint32Array.from(data));
     var result = { val: [] }; // Have to pass this around so functions can share a reference to a number[]
     var fc1InEffect = false;
     var mode;
@@ -2313,7 +2313,7 @@ exports.decodeQRdata = decodeQRdata;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var BitStream = /** @class */ (function () {
     function BitStream(bytes) {
         this.byteOffset = 0;
@@ -2370,7 +2370,7 @@ exports.BitStream = BitStream;
 
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var ReedSolomonDecoder = /** @class */ (function () {
     function ReedSolomonDecoder() {
         this.field = new GenericGF(0x011D, 256, 0); // x^8 + x^4 + x^3 + x^2 + 1
